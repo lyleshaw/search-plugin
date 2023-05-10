@@ -1,0 +1,18 @@
+{
+  "schema_version": "v1",
+  "name_for_model": "search",
+  "name_for_human": "Google Search Plugin",
+  "description_for_model": "Plugin for searching through internet to find answers to questions and retrieve relevant information. Use it whenever a user asks something that might be found in Google or users ask to visit a website.",
+  "description_for_human": "Search through Google.",
+  "auth": {
+    "type": "none"
+  },
+  "api": {
+    "type": "openapi",
+    "url": "https://search.aireview.tech/.well-known/openapi.json",
+    "has_user_authentication": false
+  },
+  "logo_url": "https://search.aireview.tech/.well-known/logo.png",
+  "contact_email": "xlyleshaw@gmail.com",
+  "legal_info_url": "http://example.com/legal-info"
+}
