@@ -1,24 +1,33 @@
 {
   "openapi": "3.0.2",
   "info": {
-    "title": "Google Search Plugin",
-    "description": "Plugin for searching through internet to find answers to questions and retrieve relevant information.Use it whenever a user asks something that might be found in Google or users ask to visit a website.",
+    "title": "Search Plugin",
+    "description": "This tool allows users to provide a URL(or URLs) and optionally requests for interacting with, extracting specific information or how to do with the content from the URL. Requests may include rewrite, translate, and others. If there any requests, when accessing the /api/visit-web endpoint, the parameter 'user_has_request' should be set to 'true. And if there's no any requests, 'user_has_request' should be set to 'false'.",
     "version": "1.0.0"
   },
   "paths": {
-    "/api/query": {
+    "/api/search": {
       "get": {
         "summary": "Search",
-        "description": "Search for query, return search results in string.",
-        "operationId": "search_api_query_get",
+        "description": "if there is any keyword that can be searched in google, give them to me in user's word only without any additional words, then link should be like 'https://www.google.com/search?q={keyword}'. If there is a URL, the link should be this URL",
+        "operationId": "search_api_search_get",
         "parameters": [
           {
             "required": true,
             "schema": {
-              "title": "Query",
+              "title": "Link",
               "type": "string"
             },
-            "name": "query",
+            "name": "link",
+            "in": "query"
+          },
+          {
+            "required": true,
+            "schema": {
+              "title": "User Has Request",
+              "type": "boolean"
+            },
+            "name": "user_has_request",
             "in": "query"
           }
         ],
@@ -28,7 +37,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "title": "Response Search Api Query Get",
+                  "title": "Response Search Api Search Get",
                   "type": "string"
                 }
               }

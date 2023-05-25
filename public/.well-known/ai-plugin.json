@@ -1,9 +1,9 @@
 {
   "schema_version": "v1",
-  "name_for_model": "search",
-  "name_for_human": "Google Search Plugin",
-  "description_for_model": "Plugin for searching through internet to find answers to questions and retrieve relevant information. Use it whenever a user asks something that might be found in Google or users ask to visit a website.",
-  "description_for_human": "Search through Google.",
+  "name_for_model": "search_plugin",
+  "name_for_human": "Search Plugin",
+  "description_for_model": "This tool allows users to provide a URL(or URLs) and optionally requests for interacting with, extracting specific information or how to do with the content from the URL. Requests may include rewrite, translate, and others. If there any requests, when accessing the /api/visit-web endpoint, the parameter 'user_has_request' should be set to 'true. And if there's no any requests, 'user_has_request' should be set to 'false'.",
+  "description_for_human": "Search through Google or URL.",
   "auth": {
     "type": "none"
   },
