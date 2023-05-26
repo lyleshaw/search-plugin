@@ -2,32 +2,31 @@
   "openapi": "3.0.2",
   "info": {
     "title": "Search Plugin",
-    "description": "This tool allows users to provide a URL(or URLs) and optionally requests for interacting with, extracting specific information or how to do with the content from the URL. Requests may include rewrite, translate, and others. If there any requests, when accessing the /api/visit-web endpoint, the parameter 'user_has_request' should be set to 'true. And if there's no any requests, 'user_has_request' should be set to 'false'.",
+    "description": "Use this plugin whenever users want to get content from website or provided an URL or want to get some latest info. The plugin enables you to fetch and return the content of a provided URL, allowing the model to access and utilize information from the internet.",
     "version": "1.0.0"
   },
+  "servers": [
+    {
+      "url": "https://search.aireview.tech/",
+      "description": "Prod environment"
+    }
+  ],
   "paths": {
     "/api/search": {
       "get": {
         "summary": "Search",
-        "description": "if there is any keyword that can be searched in google, give them to me in user's word only without any additional words, then link should be like 'https://www.google.com/search?q={keyword}'. If there is a URL, the link should be this URL",
+        "description": "You should generate URLs based on user input, such as creating a Google search URL (https://www.google.com/search?q={keyword}) to gather more information and assist users more effectively. For example, when a user asks for the Bitcoin price, you should send a HTTP request to https://coinmarketcap.com/currencies/bitcoin/ to retrieve the current price. If there is a URL, just send it.Only send URL link to this plugin.",
         "operationId": "search_api_search_get",
         "parameters": [
           {
+            "description": "request link",
             "required": true,
             "schema": {
               "title": "Link",
-              "type": "string"
+              "type": "string",
+              "description": "request link"
             },
             "name": "link",
-            "in": "query"
-          },
-          {
-            "required": true,
-            "schema": {
-              "title": "User Has Request",
-              "type": "boolean"
-            },
-            "name": "user_has_request",
             "in": "query"
           }
         ],

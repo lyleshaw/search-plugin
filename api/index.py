@@ -1,20 +1,23 @@
 import requests
 import validators
 from bs4 import BeautifulSoup
-from fastapi import FastAPI
+from fastapi import FastAPI, Path, Query
 from starlette.middleware.cors import CORSMiddleware
 
 from api.logger import logger
 
 app = FastAPI(
     title="Search Plugin",
-    description="This tool allows users to provide a URL(or URLs) "
-                "and optionally requests for interacting with, extracting specific information or how to do "
-                "with the content from the URL. Requests may include rewrite, translate, and others. "
-                "If there any requests, when accessing the /api/visit-web endpoint, the parameter 'user_has_request' "
-                "should be set to 'true. And if there's no any requests, 'user_has_request' should be set to 'false'.",
+    description="Use this plugin whenever users want to get content from website or provided an URL or want to get "
+                "some latest info. The plugin enables you to fetch and return the content of a provided URL, "
+                "allowing the model to access and utilize information from the internet.",
     version="1.0.0",
+    servers=[
+        {"url": "https://search.aireview.tech/", "description": "Prod environment"},
+    ],
+    docs_url="/api/docs"
 )
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=['*'],
@@ -43,11 +46,13 @@ def get_text(text_path):
 # Path: /api/search
 # Param: query: str
 # Return: resp: str
-@app.get("/api/search", description="if there is any keyword that can be searched in google, give them to me in "
-                                    "user's word only without any additional words, then link should be like "
-                                    "'https://www.google.com/search?q={keyword}'. If there is a URL, the link should "
-                                    "be this URL")
-async def search(link: str) -> str:
+@app.get("/api/search", description="You should generate URLs based on user input, such as creating a Google search "
+                                    "URL (https://www.google.com/search?q={keyword}) to gather more information and "
+                                    "assist users more effectively. For example, when a user asks for the Bitcoin "
+                                    "price, you should send a HTTP request to "
+                                    "https://coinmarketcap.com/currencies/bitcoin/ to retrieve the current price. If "
+                                    "there is a URL, just send it.Only send URL link to this plugin.")
+async def search(link: str = Query(description="request link")) -> str:
     logger.info("search start")
     logger.info("HTTP /search request: %s", link)
     text = get_text(link)
