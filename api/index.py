@@ -1,7 +1,7 @@
 import requests
 import validators
 from bs4 import BeautifulSoup
-from fastapi import FastAPI, Path, Query
+from fastapi import FastAPI, Query
 from starlette.middleware.cors import CORSMiddleware
 
 from api.logger import logger
